@@ -1,0 +1,42 @@
+site_name: FRC Team 1246 Internal Docs
+repo_url: https://github.com/AgincourtSkunkworks/FRCDocs
+theme:
+  name: material
+  logo: assets/imgs/logo.png
+  favicon: assets/imgs/logo.png
+  language: en
+  palette:
+    scheme: slate
+    primary: black
+    accent: grey
+  features:
+    - content.code.copy
+    - navigation.ptah
+    - navigation.indexes
+plugins:
+  - git-revision-date-localized:
+      enabled: !ENV [CI, false]
+      enable_creation_date: true
+      fallback_to_build_date: true
+  - git-committers:
+      enabled: !ENV [CI, false]
+      repository: AgincourtSkunkworks/FRCDocs
+      branch: main
+  - search
+  - tags
+  - mkdocs-nav-weight
+markdown_extensions:
+  - toc:
+      title: Table of Contents
+      permalink: true
+      permalink_title: Jump to Section
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+  - admonition
+  - attr_list
+  - md_in_html
+  - pymdownx.details
+  - pymdownx.highlight
+  - pymdownx.inlinehilite
+  - pymdownx.superfences
