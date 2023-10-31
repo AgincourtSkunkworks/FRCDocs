@@ -11,7 +11,9 @@ theme:
     accent: grey
   features:
     - content.code.copy
-    - navigation.ptah
+    - navigation.path
+    - navigation.tabs
+    - navigation.expand
     - navigation.indexes
 plugins:
   - git-revision-date-localized:
@@ -40,3 +42,4 @@ markdown_extensions:
   - pymdownx.highlight
   - pymdownx.inlinehilite
   - pymdownx.superfences
+  - pymdownx.keys
