@@ -3,7 +3,7 @@ repo_url: https://github.com/AgincourtSkunkworks/FRCDocs
 theme:
   name: material
   logo: assets/imgs/logo.png
-  favicon: assets/imgs/logo.png
+  favicon: assets/imgs/logo.ico
   language: en
   palette:
     scheme: slate
