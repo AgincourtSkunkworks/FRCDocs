@@ -2,3 +2,4 @@ mkdocs-material~=9.4.7
 mkdocs-nav-weight~=0.1.0
 mkdocs-git-revision-date-localized-plugin~=1.2.1
 mkdocs-git-committers-plugin-2~=1.2.0
+mkdocs-open-in-new-tab~=1.0.3

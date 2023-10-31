@@ -27,6 +27,7 @@ plugins:
   - search
   - tags
   - mkdocs-nav-weight
+  - open-in-new-tab
 markdown_extensions:
   - toc:
       title: Table of Contents
