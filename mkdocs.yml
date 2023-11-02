@@ -11,6 +11,7 @@ theme:
     accent: grey
   features:
     - content.code.copy
+    - content.code.annotate
     - navigation.path
     - navigation.tabs
     - navigation.expand
