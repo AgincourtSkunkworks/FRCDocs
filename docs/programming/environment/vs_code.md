@@ -19,20 +19,13 @@ To install extensions:
 
 1. Open VS Code
 2. Click the extensions button on the left hand side of the window (or press ++ctrl+shift+x++)
-3. Search for the extension you want
+3. Search for the extension you want (by name or ID)
 4. Click the `Install` button
 
 ---
 
 It is recommended that you install the following extensions:
 
-- `wpilibsuite.vscode-wpilib`
-- `vscjava.vscode-java-pack`
-
-### WPILib
-It is recommended that you install the WPILib extension for VS Code, as it does a lot of stuff specific to FRC, such as generating template projects, or adding external libraries. However, if all you're doing is editing the existing code, you don't *need* it.
-
-1. Open VS Code
-2. Click the extensions button on the left hand side of the window (or press ++ctrl+shift+x++)
-3. Search for `wpilibsuite.vscode-wpilib`
-4. Click the `Install` button
+- WPILib (`wpilibsuite.vscode-wpilib`): Adds additional functionality for WPILib projects, including generating project templates, handling external dependencies, and more.
+- Extension Pack for Java (`vscjava.vscode-java-pack`): Adds additional functionality for Java projects, including debugging, testing, and more.
+- Better Comments (`aaron-bond.better-comments`): Adds additional syntax highlighting for comments, including TODOs, notes, and more.
