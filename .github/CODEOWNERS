@@ -1,0 +1,8 @@
+# All doc-related files
+/docs/ @TheodoreHua
+mkdocs.yml @TheodoreHua
+requirements.txt @TheodoreHua
+# Any GitHub configuration files
+/.github/ @TheodoreHua
+# License File
+LICENSE @TheodoreHua
