@@ -1,8 +1,8 @@
 # All doc-related files
-/docs/ @TheodoreHua
-mkdocs.yml @TheodoreHua
-requirements.txt @TheodoreHua
+/docs/ @AgincourtSkunkworks/core
+mkdocs.yml @AgincourtSkunkworks/core
+requirements.txt @AgincourtSkunkworks/core
 # Any GitHub configuration files
-/.github/ @TheodoreHua
+/.github/ @AgincourtSkunkworks/core
 # License File
-LICENSE @TheodoreHua
+LICENSE @AgincourtSkunkworks/core
