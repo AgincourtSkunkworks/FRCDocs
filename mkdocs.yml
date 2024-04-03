@@ -23,7 +23,7 @@ plugins:
   - git-committers:
       enabled: !ENV [CI, false]
       repository: AgincourtSkunkworks/FRCDocs
-      branch: main
+      branch: master
   - search
   - tags
   - mkdocs-nav-weight
