@@ -12,11 +12,13 @@ theme:
   features:
     - content.code.copy  # adds a copy button to code blocks
     - content.code.annotate  # allows annotation in code blocks
+    - content.tooltips  # improved title attributes (tooltips)
     # https://squidfunk.github.io/mkdocs-material/setup/setting-up-navigation
     - navigation.path  # shows breadcrumbs above the title (insiders only, doesn't do anything)
     - navigation.tabs  # enables navigation tabs (renders top-level sections as tabs on the navbar rather than in the ToC)
     - navigation.expand  # automatically expands all collapsible sections in the ToC
     - navigation.indexes  # allows for the specification of an index for sections, either `index.md` in the folder, or specified in the `nav` config
+    - search.share  # adds a share button (and support for shared links) to search queries
 plugins:
   # https://squidfunk.github.io/mkdocs-material/setup/adding-a-git-repository/
   - git-revision-date-localized:  # shows revision dates at the bottom of the document
