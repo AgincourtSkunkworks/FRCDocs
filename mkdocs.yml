@@ -29,10 +29,10 @@ plugins:
       enabled: !ENV [CI, false]
       repository: AgincourtSkunkworks/FRCDocs
       branch: master  # branch to pull from, should be the branch used to deploy the docs
-  - search  # adds a search bar in the header
-  - tags  # adds support for tags (https://squidfunk.github.io/mkdocs-material/setup/setting-up-tags/)
   - mkdocs-nav-weight  # adds support for weighted navigation via frontmatter, allowing for reorganization without manually specifying everything (`nav` config) - https://pypi.org/project/mkdocs-nav-weight/
   - open-in-new-tab  # specifies that all links should be opened in a new tab
+  - search  # adds a search bar in the header
+  - tags  # adds support for tags (https://squidfunk.github.io/mkdocs-material/setup/setting-up-tags/)
 markdown_extensions:
   # https://squidfunk.github.io/mkdocs-material/setup/extensions/python-markdown/#table-of-contents
   - toc:  # adds a table of contents to each page, and adds a button to get the anchor link for each section
@@ -46,13 +46,20 @@ markdown_extensions:
   # https://squidfunk.github.io/mkdocs-material/setup/extensions/python-markdown-extensions/#tabbed
   - pymdownx.tabbed:  # adds support for tabbed content in Markdown
       alternate_style: true
+  # https://squidfunk.github.io/mkdocs-material/setup/extensions/python-markdown-extensions/#snippets
+  - pymdownx.snippets:
+      auto_append:
+        - includes/abbreviations.md  # auto-add abbreviations masterlist
+  - abbr  # adds abbreviations (https://squidfunk.github.io/mkdocs-material/setup/extensions/python-markdown/#abbreviations)
   - admonition  # adds admonitions (https://squidfunk.github.io/mkdocs-material/setup/extensions/python-markdown/#admonition)
-  - footnotes  # adds footnotes (https://squidfunk.github.io/mkdocs-material/setup/extensions/python-markdown/#footnotes)
   - attr_list  # allows for HTML & CSS attributes to be added to Markdown, required/heavily used (https://squidfunk.github.io/mkdocs-material/setup/extensions/python-markdown/#attribute-lists)
+  - footnotes  # adds footnotes (https://squidfunk.github.io/mkdocs-material/setup/extensions/python-markdown/#footnotes)
   - md_in_html  # allows for Markdown to be used in HTML segments (https://squidfunk.github.io/mkdocs-material/setup/extensions/python-markdown/#markdown-in-html)
-  - tables  # allows for easy Markdown tables (https://squidfunk.github.io/mkdocs-material/setup/extensions/python-markdown/#tables)
   - pymdownx.details  # allows for collapsible admonitions (https://squidfunk.github.io/mkdocs-material/setup/extensions/python-markdown-extensions/#details)
   - pymdownx.highlight  # adds additional highlighting support (https://squidfunk.github.io/mkdocs-material/setup/extensions/python-markdown-extensions/#highlight)
   - pymdownx.inlinehilite  # allows for syntax highlighting in in-line code blocks (https://squidfunk.github.io/mkdocs-material/setup/extensions/python-markdown-extensions/#inlinehilite)
   - pymdownx.keys  # allows for better rendering of keyboard keys (https://squidfunk.github.io/mkdocs-material/setup/extensions/python-markdown-extensions/#keys)
   - pymdownx.superfences  # allows for better nesting of various Markdown elements (https://squidfunk.github.io/mkdocs-material/setup/extensions/python-markdown-extensions/#superfences)
+  - tables  # allows for easy Markdown tables (https://squidfunk.github.io/mkdocs-material/setup/extensions/python-markdown/#tables)
+watch:  # list of non-docs folders that will trigger refresh of mkdocs serve
+  - includes
