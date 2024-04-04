@@ -10,38 +10,47 @@ theme:
     primary: black
     accent: grey
   features:
-    - content.code.copy
-    - content.code.annotate
-    - navigation.path
-    - navigation.tabs
-    - navigation.expand
-    - navigation.indexes
+    - content.code.copy  # adds a copy button to code blocks
+    - content.code.annotate  # allows annotation in code blocks
+    # https://squidfunk.github.io/mkdocs-material/setup/setting-up-navigation
+    - navigation.path  # shows breadcrumbs above the title (insiders only, doesn't do anything)
+    - navigation.tabs  # enables navigation tabs (renders top-level sections as tabs on the navbar rather than in the ToC)
+    - navigation.expand  # automatically expands all collapsible sections in the ToC
+    - navigation.indexes  # allows for the specification of an index for sections, either `index.md` in the folder, or specified in the `nav` config
 plugins:
-  - git-revision-date-localized:
+  # https://squidfunk.github.io/mkdocs-material/setup/adding-a-git-repository/
+  - git-revision-date-localized:  # shows revision dates at the bottom of the document
       enabled: !ENV [CI, false]
       enable_creation_date: true
       fallback_to_build_date: true
-  - git-committers:
+  - git-committers:  # shows the commiters (contributors) to each page at the bottom of the document
       enabled: !ENV [CI, false]
       repository: AgincourtSkunkworks/FRCDocs
-      branch: main
-  - search
-  - tags
-  - mkdocs-nav-weight
-  - open-in-new-tab
+      branch: master  # branch to pull from, should be the branch used to deploy the docs
+  - search  # adds a search bar in the header
+  - tags  # adds support for tags (https://squidfunk.github.io/mkdocs-material/setup/setting-up-tags/)
+  - mkdocs-nav-weight  # adds support for weighted navigation via frontmatter, allowing for reorganization without manually specifying everything (`nav` config) - https://pypi.org/project/mkdocs-nav-weight/
+  - open-in-new-tab  # specifies that all links should be opened in a new tab
 markdown_extensions:
-  - toc:
+  # https://squidfunk.github.io/mkdocs-material/setup/extensions/python-markdown/#table-of-contents
+  - toc:  # adds a table of contents to each page, and adds a button to get the anchor link for each section
       title: Table of Contents
       permalink: true
       permalink_title: Jump to Section
-  - pymdownx.emoji:
+  # https://squidfunk.github.io/mkdocs-material/setup/extensions/python-markdown-extensions/#emoji
+  - pymdownx.emoji:  # adds support for various emojis, required/heavily used
       emoji_index: !!python/name:material.extensions.emoji.twemoji
       emoji_generator: !!python/name:material.extensions.emoji.to_svg
-  - admonition
-  - attr_list
-  - md_in_html
-  - pymdownx.details
-  - pymdownx.highlight
-  - pymdownx.inlinehilite
-  - pymdownx.superfences
-  - pymdownx.keys
+  # https://squidfunk.github.io/mkdocs-material/setup/extensions/python-markdown-extensions/#tabbed
+  - pymdownx.tabbed:  # adds support for tabbed content in Markdown
+      alternate_style: true
+  - admonition  # adds admonitions (https://squidfunk.github.io/mkdocs-material/setup/extensions/python-markdown/#admonition)
+  - footnotes  # adds footnotes (https://squidfunk.github.io/mkdocs-material/setup/extensions/python-markdown/#footnotes)
+  - attr_list  # allows for HTML & CSS attributes to be added to Markdown, required/heavily used (https://squidfunk.github.io/mkdocs-material/setup/extensions/python-markdown/#attribute-lists)
+  - md_in_html  # allows for Markdown to be used in HTML segments (https://squidfunk.github.io/mkdocs-material/setup/extensions/python-markdown/#markdown-in-html)
+  - tables  # allows for easy Markdown tables (https://squidfunk.github.io/mkdocs-material/setup/extensions/python-markdown/#tables)
+  - pymdownx.details  # allows for collapsible admonitions (https://squidfunk.github.io/mkdocs-material/setup/extensions/python-markdown-extensions/#details)
+  - pymdownx.highlight  # adds additional highlighting support (https://squidfunk.github.io/mkdocs-material/setup/extensions/python-markdown-extensions/#highlight)
+  - pymdownx.inlinehilite  # allows for syntax highlighting in in-line code blocks (https://squidfunk.github.io/mkdocs-material/setup/extensions/python-markdown-extensions/#inlinehilite)
+  - pymdownx.keys  # allows for better rendering of keyboard keys (https://squidfunk.github.io/mkdocs-material/setup/extensions/python-markdown-extensions/#keys)
+  - pymdownx.superfences  # allows for better nesting of various Markdown elements (https://squidfunk.github.io/mkdocs-material/setup/extensions/python-markdown-extensions/#superfences)

@@ -1,0 +1,8 @@
+# All doc-related files
+/docs/ @AgincourtSkunkworks/core
+mkdocs.yml @AgincourtSkunkworks/core
+requirements.txt @AgincourtSkunkworks/core
+# Any GitHub configuration files
+/.github/ @AgincourtSkunkworks/core
+# License File
+LICENSE @AgincourtSkunkworks/core
