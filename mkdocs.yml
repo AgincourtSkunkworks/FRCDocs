@@ -14,11 +14,19 @@ theme:
     - content.code.annotate  # allows annotation in code blocks
     - content.tooltips  # improved title attributes (tooltips)
     # https://squidfunk.github.io/mkdocs-material/setup/setting-up-navigation
+    - navigation.expand  # automatically expands all collapsible sections in the ToC
+    - navigation.footer  # adds previous/next buttons to the bottom of the page for easier navigation
+    - navigation.indexes  # allows for the specification of an index for sections, either `index.md` in the folder, or specified in the `nav` config
     - navigation.path  # shows breadcrumbs above the title (insiders only, doesn't do anything)
     - navigation.tabs  # enables navigation tabs (renders top-level sections as tabs on the navbar rather than in the ToC)
-    - navigation.expand  # automatically expands all collapsible sections in the ToC
-    - navigation.indexes  # allows for the specification of an index for sections, either `index.md` in the folder, or specified in the `nav` config
     - search.share  # adds a share button (and support for shared links) to search queries
+extra:
+  social:  # add social links to the footer (https://squidfunk.github.io/mkdocs-material/setup/setting-up-the-footer/#social-links)
+    - icon: fontawesome/brands/github
+      link: https://github.com/AgincourtSkunkworks
+  # NOTE: To anyone looking to remove the generator notice ("Made with Material for MkDocs"), this was INTENTIONALLY
+  #       left ENABLED when the docs site was initially made to support the Material for MkDocs project. Please consider
+  #       leaving it enabled. See: https://squidfunk.github.io/mkdocs-material/setup/setting-up-the-footer/#generator-notice
 plugins:
   # https://squidfunk.github.io/mkdocs-material/setup/adding-a-git-repository/
   - git-revision-date-localized:  # shows revision dates at the bottom of the document
