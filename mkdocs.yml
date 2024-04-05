@@ -23,6 +23,7 @@ theme:
     - navigation.tabs  # enables navigation tabs (renders top-level sections as tabs on the navbar rather than in the ToC)
     - navigation.top  # adds a "back to top" button when starting to scroll back up
     - search.share  # adds a share button (and support for shared links) to search queries
+    - toc.integrate  # integrates the table of contents with the navbar to save space
 extra:
   social:  # add social links to the footer (https://squidfunk.github.io/mkdocs-material/setup/setting-up-the-footer/#social-links)
     - icon: fontawesome/brands/github
