@@ -41,6 +41,14 @@ plugins:
       enabled: !ENV [CI, false]
       repository: AgincourtSkunkworks/FRCDocs
       branch: master  # branch to pull from, should be the branch used to deploy the docs
+  # https://github.com/byrnereese/mkdocs-minify-plugin
+  - minify:
+      minify_html: true
+      minify_js: true
+      minify_css: true
+      htmlmin_opts:
+          remove_comments: true
+      cache_safe: true
   - mkdocs-nav-weight  # adds support for weighted navigation via frontmatter, allowing for reorganization without manually specifying everything (`nav` config) - https://pypi.org/project/mkdocs-nav-weight/
   - open-in-new-tab  # specifies that all links should be opened in a new tab
   - search  # adds a search bar in the header
