@@ -1,5 +1,7 @@
 ---
 title: Home
+hide:
+  - footer
 ---
 
 # FRC Team 1246 Documentation

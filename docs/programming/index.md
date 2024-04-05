@@ -1,5 +1,7 @@
 ---
 weight: 0
+hide:
+  - footer
 ---
 
 # Programming
