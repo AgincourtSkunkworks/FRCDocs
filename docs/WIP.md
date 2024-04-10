@@ -1,5 +1,8 @@
 ---
 title: Work in Progress
+hide:
+    - navigation
+    - footer
 ---
 
 !!! info

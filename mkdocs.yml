@@ -86,8 +86,9 @@ markdown_extensions:
 watch:  # list of non-docs folders that will trigger refresh of mkdocs serve
   - includes
 
-# NAVTREE IS MANUALLY SPECIFIED
-# All entries in the nav MUST be added here to show up. Pages will still be accessible via URL if not here, however will not show up.
+# ! NAVTREE IS MANUALLY SPECIFIED
+# All entries in the nav MUST be added here to show up. Pages will still be accessible via URL if not here, however will not show up in the nav.
+# Remember to modify this list when pages are removed or deleted.
 nav:
   - Home: index.md
   - Design:
@@ -99,7 +100,6 @@ nav:
   - Programming:
     - programming/index.md
     - Hardware:
-      - Controller: programming/hardware/controller.md
       - Gyro (NavX): programming/hardware/gyro_navx2.md
       - Radio: programming/hardware/radio.md
   - Business:

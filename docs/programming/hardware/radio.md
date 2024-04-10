@@ -1,20 +1,24 @@
 # Radio
 --8<-- "incomplete.md"
 
-## Documentation
-FRC themselves provide documentation on radio configuration, which is available [here](https://docs.wpilib.org/en/stable/docs/zero-to-robot/step-3/radio-programming.html). This information is a summary of my (our) own experiences with the radio, however it's recommended you read through that guide as well as this will only contain a summary of the basic steps. A majority of the information in this guide is on troubleshooting the issues we encountered.
-
 ## Downloading Radio Configuration Utility
-The FRC Radio Configuration tool is needed to configure the radio, the download link at time of writing is [here](https://firstfrc.blob.core.windows.net/frc2023/Radio/FRC_Radio_Configuration_23_0_2.zip), however the most recent link can always be found at the top of the [documentation](#documentation). After the tool is downloaded, unzip it, and use the EXE file to run the tool. Ensure that the tool is run as an Administrator (it should prompt you to do so if you don't) -- it will not work otherwise.
+
+!!! note
+
+    If you have downloaded the FRC Game Tools package from NI, this tool should already have been installed. You should not need to download it again unless it's missing.
+
+The FRC Radio Configuration tool is needed to configure the radio. Please see the [documentation](#helpful-links) for the up-to-date download link. After the tool is downloaded, unzip it, and use the EXE file to run the tool. Ensure that the tool is run as an Administrator (it should prompt you to do so if you don't) -- it will not work otherwise.
 
 ## Configuring the Radio
 
 !!! info
     This section is not yet completed
 
+<!-- TODO -->
+
 ## Troubleshooting
 ### Radio is not turning on
-Ensure that the POE (Power over Ethernet, a.k.a. the orange Ethernet cable) is connected to the bottom (the one next to the barrel power connector)
+Ensure that the POE (Power over Ethernet, a.k.a. the orange Ethernet cable) is connected to the bottom (the one next to the barrel power connector), and that the barrel power connector is connected to the VRM (Voltage Regulator Module). For additional details, please see the electrical documentation. <!-- TODO: Update with electrical link once created -->
 
 ### What network interface do I use?
 If prompted for a network interface (if you choose the wrong one earlier, you can use the Tools → Network Interface menu to change it), ensure that you have **Ethernet** selected. If **Ethernet** is not available in the list, ensure that the radio is on, an Ethernet cable is plugged in, and the Ethernet adapter is working.
@@ -43,3 +47,5 @@ As the documentation says, we'll need to disable all network adapters other than
 ### Verification Issues
 If you needed to disable your network adapters previously, you may need to re-enable them for verification to work. If during the verification process, an error occurs, try to re-enable your network adapters and try again. If this doesn't work, restart the program and try again -- it may take a couple of tries.
 
+## Helpful Links
+- [Official Documentation](https://docs.wpilib.org/en/stable/docs/zero-to-robot/step-3/radio-programming.html)
