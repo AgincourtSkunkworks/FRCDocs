@@ -1,7 +1,7 @@
 mkdocs-material~=9.5.17
 
-mkdocs-nav-weight~=0.1.0
 mkdocs-git-revision-date-localized-plugin~=1.2.1
 mkdocs-git-committers-plugin-2~=1.2.0
 mkdocs-open-in-new-tab~=1.0.3
 mkdocs-minify-plugin~=0.8.0
+mkdocs-awesome-pages-plugin~=2.9.2

@@ -1,4 +1,6 @@
 # Controller
+--8<-- "outdated.md"
+
 [Official Documentation - Basic](https://docs.wpilib.org/en/stable/docs/software/basic-programming/joystick.html)  
 [Official Documentation - Command-Based](https://docs.wpilib.org/en/stable/docs/software/commandbased/binding-commands-to-triggers.html)
 

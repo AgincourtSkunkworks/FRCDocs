@@ -1,4 +1,5 @@
 # Radio
+--8<-- "incomplete.md"
 
 ## Documentation
 FRC themselves provide documentation on radio configuration, which is available [here](https://docs.wpilib.org/en/stable/docs/zero-to-robot/step-3/radio-programming.html). This information is a summary of my (our) own experiences with the radio, however it's recommended you read through that guide as well as this will only contain a summary of the basic steps. A majority of the information in this guide is on troubleshooting the issues we encountered.

@@ -50,7 +50,7 @@ plugins:
       htmlmin_opts:
           remove_comments: true
       cache_safe: true
-  - mkdocs-nav-weight  # adds support for weighted navigation via frontmatter, allowing for reorganization without manually specifying everything (`nav` config) - https://pypi.org/project/mkdocs-nav-weight/
+  - awesome-pages  # adds more navigation & page customization features (https://github.com/lukasgeiter/mkdocs-awesome-pages-plugin)
   - open-in-new-tab  # specifies that all links should be opened in a new tab
   - search  # adds a search bar in the header
   - tags  # adds support for tags (https://squidfunk.github.io/mkdocs-material/setup/setting-up-tags/)
@@ -69,6 +69,7 @@ markdown_extensions:
       alternate_style: true
   # https://squidfunk.github.io/mkdocs-material/setup/extensions/python-markdown-extensions/#snippets
   - pymdownx.snippets:
+      base_path: includes
       auto_append:
         - includes/abbreviations.md  # auto-add abbreviations masterlist
   - abbr  # adds abbreviations (https://squidfunk.github.io/mkdocs-material/setup/extensions/python-markdown/#abbreviations)
@@ -84,3 +85,24 @@ markdown_extensions:
   - tables  # allows for easy Markdown tables (https://squidfunk.github.io/mkdocs-material/setup/extensions/python-markdown/#tables)
 watch:  # list of non-docs folders that will trigger refresh of mkdocs serve
   - includes
+
+# NAVTREE IS MANUALLY SPECIFIED
+# All entries in the nav MUST be added here to show up. Pages will still be accessible via URL if not here, however will not show up.
+nav:
+  - Home: index.md
+  - Design:
+    - WIP.md
+  - Build:
+    - WIP.md
+  - Electrical:
+    - WIP.md
+  - Programming:
+    - programming/index.md
+    - Hardware:
+      - Controller: programming/hardware/controller.md
+      - Gyro (NavX): programming/hardware/gyro_navx2.md
+      - Radio: programming/hardware/radio.md
+  - Business:
+    - WIP.md
+  - Other:
+    - WIP.md
