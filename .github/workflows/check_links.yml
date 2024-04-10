@@ -8,4 +8,3 @@ jobs:
         - uses: byrnereese/github-action-mkdocs-link-check@v1
           with:
             local-only: true
-                
