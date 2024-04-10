@@ -1,4 +1,5 @@
 site_name: FRC Team 1246 Docs
+site_url: https://agincourtskunkworks.github.io/FRCDocs  # this NEEDS to be updated to the URL we are using, especially when on a path (e.g. /FRCDocs)
 repo_url: https://github.com/AgincourtSkunkworks/FRCDocs
 theme:
   name: material
