@@ -92,17 +92,17 @@ watch:  # list of non-docs folders that will trigger refresh of mkdocs serve
 nav:
   - Home: index.md
   - Design:
-    - WIP.md
+    - design/index.md
   - Build:
-    - WIP.md
+    - build/index.md
   - Electrical:
-    - WIP.md
+    - electrical/index.md
   - Programming:
     - programming/index.md
     - Hardware:
       - Gyro (NavX): programming/hardware/gyro_navx2.md
       - Radio: programming/hardware/radio.md
   - Business:
-    - WIP.md
+    - business/index.md
   - Other:
     - WIP.md
