@@ -71,7 +71,7 @@ markdown_extensions:
   - pymdownx.snippets:
       base_path: includes
       auto_append:
-        - includes/abbreviations.md  # auto-add abbreviations masterlist
+        - abbreviations.md  # auto-add abbreviations masterlist
   - abbr  # adds abbreviations (https://squidfunk.github.io/mkdocs-material/setup/extensions/python-markdown/#abbreviations)
   - admonition  # adds admonitions (https://squidfunk.github.io/mkdocs-material/setup/extensions/python-markdown/#admonition)
   - attr_list  # allows for HTML & CSS attributes to be added to Markdown, required/heavily used (https://squidfunk.github.io/mkdocs-material/setup/extensions/python-markdown/#attribute-lists)
