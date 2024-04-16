@@ -1,4 +1,4 @@
-# Gyro (NavX2)
+# Gyro (NavX2) Calibration & Firmware
 
 This documentation is written for the KauaiLabs NavX2-MXP Gyro. If we end up using a different Gyro in the future, create a separate guide for it.
 

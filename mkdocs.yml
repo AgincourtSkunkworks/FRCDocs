@@ -99,9 +99,17 @@ nav:
     - electrical/index.md
   - Programming:
     - programming/index.md
-    - Hardware:
-      - Gyro (NavX): programming/hardware/gyro_navx2.md
-      - Radio: programming/hardware/radio.md
+    - Firmware:
+      - Gyro (NavX): programming/firmware/gyro-navx2.md
+      - Radio: programming/firmware/radio.md
+    - Control Algorithms:
+      - programming/control-algorithms/index.md
+      - Bang Bang: programming/control-algorithms/bang-bang.md
+      - PID: programming/control-algorithms/pid.md
+    - Generic Wrappers:
+      - programming/generic-wrappers/index.md
+      - Joystick: programming/generic-wrappers/joystick.md
+      - Motor Controller: programming/generic-wrappers/motor-controller.md
   - Business:
     - business/index.md
   - Other:
