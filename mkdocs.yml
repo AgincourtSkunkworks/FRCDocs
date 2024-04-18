@@ -72,6 +72,11 @@ markdown_extensions:
       base_path: includes
       auto_append:
         - abbreviations.md  # auto-add abbreviations masterlist
+  - pymdownx.superfences:  # allows for better nesting of various Markdown elements (https://squidfunk.github.io/mkdocs-material/setup/extensions/python-markdown-extensions/#superfences)
+      custom_fences:
+      - name: mermaid  # adds support for diagrams using MermaidJS (https://squidfunk.github.io/mkdocs-material/reference/diagrams/)
+        class: mermaid
+        format: !!python/name:pymdownx.superfences.fence_code_format
   - abbr  # adds abbreviations (https://squidfunk.github.io/mkdocs-material/setup/extensions/python-markdown/#abbreviations)
   - admonition  # adds admonitions (https://squidfunk.github.io/mkdocs-material/setup/extensions/python-markdown/#admonition)
   - attr_list  # allows for HTML & CSS attributes to be added to Markdown, required/heavily used (https://squidfunk.github.io/mkdocs-material/setup/extensions/python-markdown/#attribute-lists)
@@ -81,7 +86,6 @@ markdown_extensions:
   - pymdownx.highlight  # adds additional highlighting support (https://squidfunk.github.io/mkdocs-material/setup/extensions/python-markdown-extensions/#highlight)
   - pymdownx.inlinehilite  # allows for syntax highlighting in in-line code blocks (https://squidfunk.github.io/mkdocs-material/setup/extensions/python-markdown-extensions/#inlinehilite)
   - pymdownx.keys  # allows for better rendering of keyboard keys (https://squidfunk.github.io/mkdocs-material/setup/extensions/python-markdown-extensions/#keys)
-  - pymdownx.superfences  # allows for better nesting of various Markdown elements (https://squidfunk.github.io/mkdocs-material/setup/extensions/python-markdown-extensions/#superfences)
   - tables  # allows for easy Markdown tables (https://squidfunk.github.io/mkdocs-material/setup/extensions/python-markdown/#tables)
 watch:  # list of non-docs folders that will trigger refresh of mkdocs serve
   - includes
