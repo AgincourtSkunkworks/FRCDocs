@@ -51,6 +51,7 @@ plugins:
           remove_comments: true
       cache_safe: true
   - awesome-pages  # adds more navigation & page customization features (https://github.com/lukasgeiter/mkdocs-awesome-pages-plugin)
+  - charts  # adds support for charts through Vega-Lite (https://github.com/timvink/mkdocs-charts-plugin)
   - open-in-new-tab  # specifies that all links should be opened in a new tab
   - search  # adds a search bar in the header
   - tags  # adds support for tags (https://squidfunk.github.io/mkdocs-material/setup/setting-up-tags/)
@@ -60,6 +61,9 @@ markdown_extensions:
       title: Table of Contents
       permalink: true
       permalink_title: Jump to Section
+  # https://squidfunk.github.io/mkdocs-material/setup/extensions/python-markdown-extensions/#arithmatex
+  - pymdownx.arithmatex:  # adds support for math (LaTeX) expressions
+      generic: true
   # https://squidfunk.github.io/mkdocs-material/setup/extensions/python-markdown-extensions/#emoji
   - pymdownx.emoji:  # adds support for various emojis, required/heavily used
       emoji_index: !!python/name:material.extensions.emoji.twemoji
@@ -77,6 +81,9 @@ markdown_extensions:
       - name: mermaid  # adds support for diagrams using MermaidJS (https://squidfunk.github.io/mkdocs-material/reference/diagrams/)
         class: mermaid
         format: !!python/name:pymdownx.superfences.fence_code_format
+      - name: vegalite
+        class: vegalite
+        format: !!python/name:mkdocs_charts_plugin.fences.fence_vegalite
   - abbr  # adds abbreviations (https://squidfunk.github.io/mkdocs-material/setup/extensions/python-markdown/#abbreviations)
   - admonition  # adds admonitions (https://squidfunk.github.io/mkdocs-material/setup/extensions/python-markdown/#admonition)
   - attr_list  # allows for HTML & CSS attributes to be added to Markdown, required/heavily used (https://squidfunk.github.io/mkdocs-material/setup/extensions/python-markdown/#attribute-lists)
@@ -87,6 +94,13 @@ markdown_extensions:
   - pymdownx.inlinehilite  # allows for syntax highlighting in in-line code blocks (https://squidfunk.github.io/mkdocs-material/setup/extensions/python-markdown-extensions/#inlinehilite)
   - pymdownx.keys  # allows for better rendering of keyboard keys (https://squidfunk.github.io/mkdocs-material/setup/extensions/python-markdown-extensions/#keys)
   - tables  # allows for easy Markdown tables (https://squidfunk.github.io/mkdocs-material/setup/extensions/python-markdown/#tables)
+extra_javascript:  # extra Javascript resources (usually needed by other plugins)
+  - assets/mathjax.js  # for pymdownx.arithmatex
+  - https://polyfill.io/v3/polyfill.min.js?features=es6  # for pymdownx.arithmatex
+  - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js  # for pymdownx.arithmatex
+  - https://cdn.jsdelivr.net/npm/vega@5  # for charts
+  - https://cdn.jsdelivr.net/npm/vega-lite@5  # for charts
+  - https://cdn.jsdelivr.net/npm/vega-embed@6  # for charts
 watch:  # list of non-docs folders that will trigger refresh of mkdocs serve
   - includes
 

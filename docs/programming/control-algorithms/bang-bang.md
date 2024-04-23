@@ -22,7 +22,11 @@ graph LR
 Bang-Bang control is straightforward. You will continuously check if a condition is met or not. If the condition is met, you will switch the system to a certain state. If the condition is not met, you will switch the system to another state. Normally, this process will continue indefinitely, however, specific variants of Bang-Bang control may have additional conditions to stop the system, whether it be a sensor-based condition, a timeout, an interrupt, or something else.
 
 ### Signals
-The devices you are controlling with Bang-Bang control will typically be motors or solenoids. Whatever the case, they need to support 2 states (generally on or off) that can be changed via code. For motors, this is usually either off or a predefined speed. For solenoids, this is usually either extended or retracted.
+#### Input
+The actual input to a Bang-Bang control algorithm should be a boolean value, however, it is common to use a sensor reading or a calculated value that can be converted to a boolean value based on a threshold. Examples of inputs can include a limit switch (triggered?), gyro reading (within threshold), a motor encoder reading (within threshold), etc.
+
+#### Output
+There are two possible output states for a Bang-Bang control algorithm. The actual states themselves will vary based on what you are controlling with the algorithm. Examples of outputs can include motors (predefined speeds, perhaps 50% and 0%), solenoids (extended and retracted), etc.
 
 ### Tolerance
 It is rare for exact values to ever be achieved in real-world systems, and as such, it is important to account for this in your algorithms. For Bang-Bang control, if you were to switch the system on and off based on an exact value you're looking to achieve, it would result in the system constantly switching on and off as it overshoots and undershoots the target value. To prevent this, a tolerance value is usually used to give the system more time to settle before trying to correct it again. Depending on how fast the error changes, and how fine the corrections need to be, the tolerance value may need to be adjusted, a more sophisticated condition used, or a different control algorithm altogether.
@@ -35,10 +39,10 @@ We have an intake mechanism with a sensor that detects if a game piece is presen
 ```mermaid
 graph LR
   s([Start]) --> c{Game Piece Detected?}
-  c --> |True| ta[Set Intake Motors to INTAKE_SPEED]
-  ta --> c
-  c --> |False| tb["Set Intake Motors to 0 (Stop)"]
-  tb --> c
+  c ---> |True| ta[Set Intake Motors to INTAKE_SPEED]
+  ta ---> c
+  c ---> |False| tb["Set Intake Motors to 0 (Stop)"]
+  tb ---> c
 ```
 
 ### Code
