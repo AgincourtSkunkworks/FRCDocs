@@ -82,11 +82,10 @@ The integral term is used to account for the accumulated error over time. It is 
                 {"legend": "Setpoint", "time": 0, "position": 4},
                 {"legend": "Setpoint", "time": 4, "position": 4},
                 {"legend": "System wo/ Integral", "time": 0, "position": 0},
-                {"legend": "System wo/ Integral", "time": 0.25, "position": 3.5},
+                {"legend": "System wo/ Integral", "time": 0.5, "position": 3.5},
                 {"legend": "System wo/ Integral", "time": 4, "position": 3.5},
                 {"legend": "System w/ Integral", "time": 0, "position": 0},
-                {"legend": "System w/ Integral", "time": 0.25, "position": 3.5},
-                {"legend": "System w/ Integral", "time": 0.7, "position": 3.95},
+                {"legend": "System w/ Integral", "time": 0.5, "position": 3.5},
                 {"legend": "System w/ Integral", "time": 1, "position": 4},
                 {"legend": "System w/ Integral", "time": 4, "position": 4}
             ]
