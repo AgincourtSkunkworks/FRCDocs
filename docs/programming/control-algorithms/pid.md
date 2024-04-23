@@ -102,6 +102,8 @@ The integral term is used to account for the accumulated error over time. It is 
     }
     ```
 
+    In this sample graph, we are assuming that there is resistance present in the system that is not accounted for in the P term, and in the system with the integral term, it is well-tuned. As can be seen, the system without the integral term is unable to reach the setpoint, and instead has a steady-state error. The system with the integral term, however, is able to accumulate the error over time, which allows it to overcome the resistance and reach the setpoint.
+
 !!! example
 
     Consider a PID controller with only a P term that is being used to drive a set distance. If we encounter a slight uphill slope that was not accounted for in the P term, the output may not be high enough to overcome the resistance. Now, if we were to add an I term, it would accumulate the error over time, which slowly increases the output, allowing the system to overcome the resistance.
@@ -122,19 +124,17 @@ There are multiple methods that can be used to mitigate the problem of integral 
                 {"legend": "Setpoint", "time": 4, "position": 4},
                 {"legend": "Setpoint", "time": 4, "position": 2},
                 {"legend": "Setpoint", "time": 8, "position": 2},
-                {"legend": "System wo/ Integral", "time": 0, "position": 0},
-                {"legend": "System wo/ Integral", "time": 0.5, "position": 4},
-                {"legend": "System wo/ Integral", "time": 4, "position": 4},
-                {"legend": "System wo/ Integral", "time": 4.5, "position": 2},
-                {"legend": "System wo/ Integral", "time": 8, "position": 2},
+                {"legend": "System w/ Integral (Capped)", "time": 0, "position": 0},
+                {"legend": "System w/ Integral (Capped)", "time": 0.5, "position": 4},
+                {"legend": "System w/ Integral (Capped)", "time": 4, "position": 4},
+                {"legend": "System w/ Integral (Capped)", "time": 4.5, "position": 2},
+                {"legend": "System w/ Integral (Capped)", "time": 8, "position": 2},
                 {"legend": "System w/ Integral (Uncapped)", "time": 0, "position": 0},
-                {"legend": "System w/ Integral (Uncapped)", "time": 0.4, "position": 4.15},
                 {"legend": "System w/ Integral (Uncapped)", "time": 0.5, "position": 4.2},
                 {"legend": "System w/ Integral (Uncapped)", "time": 0.75, "position": 3.95},
                 {"legend": "System w/ Integral (Uncapped)", "time": 1, "position": 4},
                 {"legend": "System w/ Integral (Uncapped)", "time": 4, "position": 4},
-                {"legend": "System w/ Integral (Uncapped)", "time": 4.4, "position": 1.85},
-                {"legend": "System w/ Integral (Uncapped)", "time": 4.5, "position": 1.82},
+                {"legend": "System w/ Integral (Uncapped)", "time": 4.5, "position": 1.80},
                 {"legend": "System w/ Integral (Uncapped)", "time": 4.75, "position": 2.05},
                 {"legend": "System w/ Integral (Uncapped)", "time": 5, "position": 2},
                 {"legend": "System w/ Integral (Uncapped)", "time": 8, "position": 2}
@@ -151,6 +151,8 @@ There are multiple methods that can be used to mitigate the problem of integral 
         }
     }
     ```
+
+    In this sample graph, we are assuming that there is little resistance present in the system that is not accounted for in the P term, and the integral gain is on the high side. As can be seen, the system with the uncapped integral term overshoots the setpoint. This is a result of integral windup, and can be [mostly] mitigated by capping the integral term (or using other measures), as shown in the capped variant, where there is little to no overshooting.
 
 #### D (Derivative)
 $$
@@ -202,6 +204,8 @@ By smoothing out the response with the derivate term, we are also able to use a 
         }
     }
     ```
+
+    In this sample graph, we are assuming that we have an aggressive proportional gain. The different lines represent different amounts of damping (from the derivative term) being applied, and how it affects the system's response.
 
     - **Underdamped**: Can occur when an aggressive proportional gain is set, with an insufficiently large derivative gain (damp). Results in oscillations around the set point, until settled.
     - **Overdamped**: Can occur when the derivative gain (damp) is too large for the proportional gain. Results in a longer than necessary time to reach the set point.
