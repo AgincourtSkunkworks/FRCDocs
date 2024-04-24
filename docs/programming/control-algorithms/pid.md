@@ -367,3 +367,5 @@ public void execute() {
 *[setpoint]: The desired value that the system should reach.
 *[setpoints]: The desired value that the system should reach.
 *[set point]: The desired value that the system should reach.
+*[steady-state error]: The error that remains after the system has reached a steady (constant) state
+*[gain]: A constant multiplier used to scale the output of a control algorithm
