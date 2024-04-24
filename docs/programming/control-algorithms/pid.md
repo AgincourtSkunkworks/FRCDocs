@@ -1,7 +1,5 @@
 # PID Control
 
---8<-- "incomplete.md"
-
 While math is inevitable when talking about PID, this documentation is designed to use as little math as possible, and instead focus on the practical and basic theoretical aspects of PID control. You can find more detailed information on the math behind PID in the [Helpful Links](#helpful-links) section.
 
 ## Use Cases
@@ -19,7 +17,7 @@ flowchart LR
     s([Start]) --> ce[Calculate Error]
     ce --> p[Calculate P]
     ce --> i[Calculate I]
-    i --> ic[Cap Integral Term]
+    i --> ic[Cap I]
     ce --> d[Calculate D]
     p --> |+| o[Calculate Output]
     ic --> |+| o
@@ -29,7 +27,7 @@ flowchart LR
 ```
 
 ### Principle
-For all equations, $e(t)$ is the error at time $t$, $K_p$ is the proportional gain, $K_i$ is the integral gain, $K_d$ is the derivative gain, and $t$ is the time. The result of the PID control algorithm is the sum of the three components ($\text{output} = P(t) + I(t) + D(t)$)
+For all equations, $e(t)$ is the error at time $t$, $K_p$ is the proportional gain, $K_i$ is the integral gain, $K_d$ is the derivative gain, and $t$ is the time. The result of the PID control algorithm is the sum of the three components: $\text{output} = P(t) + I(t) + D(t)$
 
 #### P (Proportional)
 $$
@@ -85,8 +83,8 @@ The integral term is used to account for the accumulated error over time. It is 
                 {"legend": "System wo/ Integral", "time": 0.5, "position": 3.5},
                 {"legend": "System wo/ Integral", "time": 4, "position": 3.5},
                 {"legend": "System w/ Integral", "time": 0, "position": 0},
-                {"legend": "System w/ Integral", "time": 0.5, "position": 3.5},
-                {"legend": "System w/ Integral", "time": 1, "position": 4},
+                {"legend": "System w/ Integral", "time": 0.46, "position": 3.5},
+                {"legend": "System w/ Integral", "time": 0.9, "position": 4},
                 {"legend": "System w/ Integral", "time": 4, "position": 4}
             ]
         },
@@ -262,9 +260,11 @@ Put simply, the process of tuning PID consists of testing the system, adjusting 
 1. **Start with the Proportional Gain**: The proportional gain is the most important of the three constants, and should be adjusted first. Start with the [initial estimate](#initial-estimates), and adjust it until the system responds as expected.
     - If the system moves slowly, or stalls often before reaching the setpoint, try increasing the proportional gain.
     - If the system overshoots the setpoint by a large amount, or oscillates around the setpoint, try decreasing the proportional gain.
-2. **Evaluate the Integral Term**: If the system is expected to encounter resistance that the proportional term cannot overcome, or if it is observed that there is a steady-state error, the integral term should be implemented. Start with a low value, and increase it until the system responds as expected.
+    - If you find yourself unable to find a good balance between the two, try utilizing the integral and/or derivative terms, before adjusting the proportional gain further.
+2. **Evaluate the Integral Term**: If the system is expected to encounter resistance that the proportional term cannot overcome, or if it is observed that there is a steady-state error that cannot be handled with the proportional term, the integral term should be implemented. Start with a low value, and increase it until the system responds as expected.
     - If the system does not appear to be compensating enough for resistance, try increasing the integral gain.
     - If the system overshoots the setpoint, or oscillates around the setpoint, try decreasing the integral gain.
+    - If you find yourself in a position where the integral gain cannot be lowered further without being ineffective, but overshooting is still occurring in better conditions, try [capping the integral term](#integral-windup), or utilizing the derivative term to smooth out the response.
 3. **Evaluate the Derivative Term**: If the system is tuned aggressively, and it is observed that the system often overshoots the setpoint, or the speed of the system nearing the setpoint is too high, the derivative term should be implemented. Start with a low value, and increase it until the system responds as expected.
     - If the system is still moving too fast, overshoots the setpoint, or oscillates around the setpoint, try increasing the derivative gain.
     - If the system moves slowly, or stalls often before reaching the setpoint, try decreasing the derivative gain.
@@ -290,14 +290,14 @@ classDiagram
 
     class MotorController {
         +getPosition() double
-        +setSpeed(percentOutput)
+        +setSpeed(double percentOutput)
     }
 
     class PIDConstants {
-        +kP double
-        +kI double
-        +kIMax double
-        +kD double
+        +double kP
+        +double kI
+        +double kIMax
+        +double kD
     }
 ```
 
@@ -355,7 +355,11 @@ public void execute() {
 8. We cap the integral term in a bound of `-kIMax` to `kIMax`. This is to prevent integral windup, where the integral term builds up an unexpectedly large value. You can read more about this in [Integral Windup](#integral-windup).
 
 ## Helpful Links
-- [Wikipedia](https://en.wikipedia.org/wiki/PID_controller)
+- Wikipedia
+    - [PID Controller](https://en.wikipedia.org/wiki/PID_controller)
+    - [Proportional Control](https://en.wikipedia.org/wiki/Proportional_control)
+    - [Integral (Math)](https://en.wikipedia.org/wiki/Integral)
+    - [Derivative (Math)](https://en.wikipedia.org/wiki/Derivative)
 - [FRC Documentation](https://docs.wpilib.org/en/stable/docs/software/advanced-controls/introduction/introduction-to-pid.html)
 - Video Guide (by FRC Team 6814):
     - [Part 1](https://www.youtube.com/watch?v=jIKBWO7ps0w)
@@ -367,5 +371,5 @@ public void execute() {
 *[setpoint]: The desired value that the system should reach.
 *[setpoints]: The desired value that the system should reach.
 *[set point]: The desired value that the system should reach.
-*[steady-state error]: The error that remains after the system has reached a steady (constant) state
-*[gain]: A constant multiplier used to scale the output of a control algorithm
+*[steady-state error]: The error that remains after the system has reached a steady (constant) state.
+*[gain]: A constant multiplier used to scale the output of a control algorithm.
