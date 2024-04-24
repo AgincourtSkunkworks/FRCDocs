@@ -259,17 +259,100 @@ Usually, the integral and derivative gains are set to zero initially, and are on
 ### Tuning Process
 Put simply, the process of tuning PID consists of testing the system, adjusting the constants based on the system's behaviour, and repeating until the system responds as expected. Knowing what constants to adjust, and by how much is a skill that comes with experience, and is not something that can be easily taught. However, the following guidelines can be used to help you get started:
 
+1. **Start with the Proportional Gain**: The proportional gain is the most important of the three constants, and should be adjusted first. Start with the [initial estimate](#initial-estimates), and adjust it until the system responds as expected.
+    - If the system moves slowly, or stalls often before reaching the setpoint, try increasing the proportional gain.
+    - If the system overshoots the setpoint by a large amount, or oscillates around the setpoint, try decreasing the proportional gain.
+2. **Evaluate the Integral Term**: If the system is expected to encounter resistance that the proportional term cannot overcome, or if it is observed that there is a steady-state error, the integral term should be implemented. Start with a low value, and increase it until the system responds as expected.
+    - If the system does not appear to be compensating enough for resistance, try increasing the integral gain.
+    - If the system overshoots the setpoint, or oscillates around the setpoint, try decreasing the integral gain.
+3. **Evaluate the Derivative Term**: If the system is tuned aggressively, and it is observed that the system often overshoots the setpoint, or the speed of the system nearing the setpoint is too high, the derivative term should be implemented. Start with a low value, and increase it until the system responds as expected.
+    - If the system is still moving too fast, overshoots the setpoint, or oscillates around the setpoint, try increasing the derivative gain.
+    - If the system moves slowly, or stalls often before reaching the setpoint, try decreasing the derivative gain.
+4. **Repeat**: After adjusting the constants, test the system again, and repeat the process by adjusting & fine-tuning the constants until the system works well consistently under all conditions.
+
 ## Sample Implementation
 ### Scenario
-
+We have an arm mechanism with a motor attached at a pivot point. We want the arm to be able to move to a specific angle (motor position), and hold that position against gravity or other resistances.
 
 ### Flowchart
-
+As PID control mostly varies not in implementation, but in the constants used, the flowchart provided in the [Theory](#theory) section would still be representative of this sample scenario.
 
 ### Code
+We will not be using the premade PID classes provided by WPILib, nor our own generic PID classes. Instead, we will be showing the relevant segments of a simple from-scratch PID controller that would be suitable for this use case. This should give you a better understanding of how PID works, and how it can be implemented or modified to suit your needs.
 
+We will be referencing a few other classes that are not shown here, such as the `Timer` class, provided by WPILib, to get the time, the `Controller` class, which represents a standard motor controller, and `PIDConstants`, which represents some class containing the necessary constants for the PID controller. The following class diagram shows the classes we will be using:
 
-#### Ease of Tuning
+```mermaid
+classDiagram
+    class Timer {
+        +getFPGATimestamp() double
+    }
+
+    class MotorController {
+        +getPosition() double
+        +setSpeed(percentOutput)
+    }
+
+    class PIDConstants {
+        +kP double
+        +kI double
+        +kIMax double
+        +kD double
+    }
+```
+
+Please note that the following code segment **is not complete**, is more verbose than necessary, and only shows the parts relevant for PID logic. An actual implementation would necessitate additional code for Command-Based interaction, logging, QoL features (such as on-the-fly adjustment), and more.
+
+```java
+private final Timer timer;
+private final MotorController motor;
+private final PIDConstants constants;
+
+private double errorSum = 0; // (1)!
+private double lastRunTime = 0; // (2)!
+private double lastError = 0; // (3)!
+
+// ...
+
+@Override
+public void execute() {
+    if (lastRunTime == 0) lastRunTime = Timer.getFPGATimestamp(); // (4)!
+
+    // Calculate time since the last execution
+    final double currentTime = Timer.getFPGATimestamp();
+    final double dt = currentTime - lastRunTime;
+
+    // Calculate the error and error rate
+    final double error = setpoint - motor.getPosition(); // (5)!
+    final double errorRate = (error - lastError) / dt; // (6)!
+
+    // Accumulate the error
+    errorSum += error * dt; // (7)!
+    errorSum = Math.max(-constants.kIMax, Math.min(constants.kIMax, errorSum)); // (8)!
+
+    // Record values for next execution
+    lastRunTime = currentTime;
+    lastError = error;
+
+    // Calculate the PID output
+    final double p = constants.kP * error;
+    final double i = constants.kI * errorSum;
+    final double d = constants.kD * errorRate;
+    final double output = p + i + d;
+
+    // Set the motor speed
+    motor.setSpeed(output);
+}
+```
+
+1. Used to accumulate the error over time, for the integral term.
+2. Used to calculate the time since the last execution, for the derivative term.
+3. Used to calculate the rate of change of the error, for the derivative term.
+4. Prevents a large delta time value on the first execution, which would result in a large derivative term output.
+5. The error (difference between the setpoint and the current position) is used to calculate the proportional term. Remember that the proportional term is the error multiplied by a constant gain.
+6. The rate of change of the error is used to calculate the derivative term. Remember that the derivative term is the rate of change of the error, multiplied by a constant gain.
+7. Accumulates (sums) the error throughout the execution. We multiply the current error by the time, and add it to a running total, which is used to calculate the integral term. Remember that the integral term is the sum of the error over time, multiplied by a constant gain.
+8. We cap the integral term in a bound of `-kIMax` to `kIMax`. This is to prevent integral windup, where the integral term builds up an unexpectedly large value. You can read more about this in [Integral Windup](#integral-windup).
 
 ## Helpful Links
 - [Wikipedia](https://en.wikipedia.org/wiki/PID_controller)
