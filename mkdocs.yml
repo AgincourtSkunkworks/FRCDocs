@@ -1,8 +1,9 @@
-site_name: FRC Team 1246 Internal Docs
+site_name: FRC Team 1246 Docs
+site_url: https://agincourtskunkworks.github.io/FRCDocs  # this NEEDS to be updated to the URL we are using, especially when on a path (e.g. /FRCDocs)
 repo_url: https://github.com/AgincourtSkunkworks/FRCDocs
 theme:
   name: material
-  logo: assets/logo.png
+  logo: assets/logo.svg
   favicon: assets/logo.ico
   language: en
   palette:
@@ -10,37 +11,124 @@ theme:
     primary: black
     accent: grey
   features:
-    - content.code.copy
-    - navigation.path
-    - navigation.tabs
-    - navigation.expand
-    - navigation.indexes
+    - content.action.edit  # adds a button linking to edit the page on GitHub
+    - content.action.view  # adds a button linking to view the raw source on GitHub
+    - content.code.copy  # adds a copy button to code blocks
+    - content.code.annotate  # allows annotation in code blocks
+    - content.tooltips  # improved title attributes (tooltips)
+    # https://squidfunk.github.io/mkdocs-material/setup/setting-up-navigation
+    - navigation.expand  # automatically expands all collapsible sections in the ToC
+    - navigation.footer  # adds previous/next buttons to the bottom of the page for easier navigation
+    - navigation.indexes  # allows for the specification of an index for sections, either `index.md` in the folder, or specified in the `nav` config
+    - navigation.path  # shows breadcrumbs above the title (insiders only, doesn't do anything)
+    - navigation.tabs  # enables navigation tabs (renders top-level sections as tabs on the navbar rather than in the ToC)
+    - navigation.top  # adds a "back to top" button when starting to scroll back up
+    - search.share  # adds a share button (and support for shared links) to search queries
+    - toc.integrate  # integrates the table of contents with the navbar to save space
+extra:
+  social:  # add social links to the footer (https://squidfunk.github.io/mkdocs-material/setup/setting-up-the-footer/#social-links)
+    - icon: fontawesome/brands/github
+      link: https://github.com/AgincourtSkunkworks
+  # NOTE: To anyone looking to remove the generator notice ("Made with Material for MkDocs"), this was INTENTIONALLY
+  #       left ENABLED when the docs site was initially made to support the Material for MkDocs project. Please consider
+  #       leaving it enabled. See: https://squidfunk.github.io/mkdocs-material/setup/setting-up-the-footer/#generator-notice
 plugins:
-  - git-revision-date-localized:
+  # https://squidfunk.github.io/mkdocs-material/setup/adding-a-git-repository/
+  - git-revision-date-localized:  # shows revision dates at the bottom of the document
       enabled: !ENV [CI, false]
       enable_creation_date: true
       fallback_to_build_date: true
-  - git-committers:
+  - git-committers:  # shows the commiters (contributors) to each page at the bottom of the document
       enabled: !ENV [CI, false]
       repository: AgincourtSkunkworks/FRCDocs
-      branch: main
-  - search
-  - tags
-  - mkdocs-nav-weight
-  - open-in-new-tab
+      branch: master  # branch to pull from, should be the branch used to deploy the docs
+  # https://github.com/byrnereese/mkdocs-minify-plugin
+  - minify:
+      minify_html: true
+      minify_js: true
+      minify_css: true
+      htmlmin_opts:
+          remove_comments: true
+      cache_safe: true
+  - awesome-pages  # adds more navigation & page customization features (https://github.com/lukasgeiter/mkdocs-awesome-pages-plugin)
+  - charts  # adds support for charts through Vega-Lite (https://github.com/timvink/mkdocs-charts-plugin)
+  - open-in-new-tab  # specifies that all links should be opened in a new tab
+  - search  # adds a search bar in the header
+  - tags  # adds support for tags (https://squidfunk.github.io/mkdocs-material/setup/setting-up-tags/)
 markdown_extensions:
-  - toc:
+  # https://squidfunk.github.io/mkdocs-material/setup/extensions/python-markdown/#table-of-contents
+  - toc:  # adds a table of contents to each page, and adds a button to get the anchor link for each section
       title: Table of Contents
       permalink: true
       permalink_title: Jump to Section
-  - pymdownx.emoji:
+  # https://squidfunk.github.io/mkdocs-material/setup/extensions/python-markdown-extensions/#arithmatex
+  - pymdownx.arithmatex:  # adds support for math (LaTeX) expressions
+      generic: true
+  # https://squidfunk.github.io/mkdocs-material/setup/extensions/python-markdown-extensions/#emoji
+  - pymdownx.emoji:  # adds support for various emojis, required/heavily used
       emoji_index: !!python/name:material.extensions.emoji.twemoji
       emoji_generator: !!python/name:material.extensions.emoji.to_svg
-  - admonition
-  - attr_list
-  - md_in_html
-  - pymdownx.details
-  - pymdownx.highlight
-  - pymdownx.inlinehilite
-  - pymdownx.superfences
-  - pymdownx.keys
+  # https://squidfunk.github.io/mkdocs-material/setup/extensions/python-markdown-extensions/#tabbed
+  - pymdownx.tabbed:  # adds support for tabbed content in Markdown
+      alternate_style: true
+  # https://squidfunk.github.io/mkdocs-material/setup/extensions/python-markdown-extensions/#snippets
+  - pymdownx.snippets:
+      base_path: includes
+      auto_append:
+        - abbreviations.md  # auto-add abbreviations masterlist
+  - pymdownx.superfences:  # allows for better nesting of various Markdown elements (https://squidfunk.github.io/mkdocs-material/setup/extensions/python-markdown-extensions/#superfences)
+      custom_fences:
+      - name: mermaid  # adds support for diagrams using MermaidJS (https://squidfunk.github.io/mkdocs-material/reference/diagrams/)
+        class: mermaid
+        format: !!python/name:pymdownx.superfences.fence_code_format
+      - name: vegalite
+        class: vegalite
+        format: !!python/name:mkdocs_charts_plugin.fences.fence_vegalite
+  - abbr  # adds abbreviations (https://squidfunk.github.io/mkdocs-material/setup/extensions/python-markdown/#abbreviations)
+  - admonition  # adds admonitions (https://squidfunk.github.io/mkdocs-material/setup/extensions/python-markdown/#admonition)
+  - attr_list  # allows for HTML & CSS attributes to be added to Markdown, required/heavily used (https://squidfunk.github.io/mkdocs-material/setup/extensions/python-markdown/#attribute-lists)
+  - footnotes  # adds footnotes (https://squidfunk.github.io/mkdocs-material/setup/extensions/python-markdown/#footnotes)
+  - md_in_html  # allows for Markdown to be used in HTML segments (https://squidfunk.github.io/mkdocs-material/setup/extensions/python-markdown/#markdown-in-html)
+  - pymdownx.details  # allows for collapsible admonitions (https://squidfunk.github.io/mkdocs-material/setup/extensions/python-markdown-extensions/#details)
+  - pymdownx.highlight  # adds additional highlighting support (https://squidfunk.github.io/mkdocs-material/setup/extensions/python-markdown-extensions/#highlight)
+  - pymdownx.inlinehilite  # allows for syntax highlighting in in-line code blocks (https://squidfunk.github.io/mkdocs-material/setup/extensions/python-markdown-extensions/#inlinehilite)
+  - pymdownx.keys  # allows for better rendering of keyboard keys (https://squidfunk.github.io/mkdocs-material/setup/extensions/python-markdown-extensions/#keys)
+  - tables  # allows for easy Markdown tables (https://squidfunk.github.io/mkdocs-material/setup/extensions/python-markdown/#tables)
+extra_javascript:  # extra Javascript resources (usually needed by other plugins)
+  - assets/mathjax.js  # for pymdownx.arithmatex
+  - https://polyfill.io/v3/polyfill.min.js?features=es6  # for pymdownx.arithmatex
+  - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js  # for pymdownx.arithmatex
+  - https://cdn.jsdelivr.net/npm/vega@5  # for charts
+  - https://cdn.jsdelivr.net/npm/vega-lite@5  # for charts
+  - https://cdn.jsdelivr.net/npm/vega-embed@6  # for charts
+watch:  # list of non-docs folders that will trigger refresh of mkdocs serve
+  - includes
+
+# ! NAVTREE IS MANUALLY SPECIFIED
+# All entries in the nav MUST be added here to show up. Pages will still be accessible via URL if not here, however will not show up in the nav.
+# Remember to modify this list when pages are removed or deleted.
+nav:
+  - Home: index.md
+  - Design:
+    - design/index.md
+  - Build:
+    - build/index.md
+  - Electrical:
+    - electrical/index.md
+  - Programming:
+    - programming/index.md
+    - Firmware:
+      - Gyro (NavX): programming/firmware/gyro-navx2.md
+      - Radio: programming/firmware/radio.md
+    - Control Algorithms:
+      - programming/control-algorithms/index.md
+      - Bang Bang: programming/control-algorithms/bang-bang.md
+      - PID: programming/control-algorithms/pid.md
+    - Generic Wrappers:
+      - programming/generic-wrappers/index.md
+      - Joystick: programming/generic-wrappers/joystick.md
+      - Motor Controller: programming/generic-wrappers/motor-controller.md
+  - Business:
+    - business/index.md
+  - Other:
+    - WIP.md

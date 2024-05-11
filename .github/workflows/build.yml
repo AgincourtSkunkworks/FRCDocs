@@ -1,4 +1,4 @@
-name: ci
+name: Build & Publish Docs
 on:
   push:
     branches:
